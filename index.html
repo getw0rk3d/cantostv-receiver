@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CantosTV Custom Receiver</title>
+  <script src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
+  <style>
+    body { margin: 0; background-color: #000; overflow: hidden; }
+    cast-media-player {
+      --theme-hue: 210;
+      --progress-color: #448AFF;
+      --splash-image: url('https://via.placeholder.com/1920x1080.png?text=CantosTV+Loading...');
+    }
+  </style>
+</head>
+<body>
+  <cast-media-player></cast-media-player>
+  <script>
+    const context = cast.framework.CastReceiverContext.getInstance();
+    
+    // Standard configuration to handle live HLS/M3U8 streams smoothly
+    const playbackConfig = new cast.framework.PlaybackConfig();
+    playbackConfig.autoResumeDuration = 5;
+    context.start({playbackConfig: playbackConfig});
+  </script>
+</body>
+</html>
