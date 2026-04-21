@@ -4,22 +4,33 @@
   <title>CantosTV Custom Receiver</title>
   <script src="//www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
   <style>
-    body { margin: 0; background-color: #000; overflow: hidden; }
-    cast-media-player {
-      --theme-hue: 210;
-      --progress-color: #448AFF;
-      --splash-image: url('https://via.placeholder.com/1920x1080.png?text=CantosTV+Loading...');
-    }
+    body { margin: 0; background-color: #000; color: white; font-family: sans-serif; }
+    cast-media-player { width: 100%; height: 100%; }
+    #debug { position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.7); padding: 10px; z-index: 100; font-size: 14px; pointer-events: none; }
   </style>
 </head>
 <body>
+  <div id="debug">CantosTV Ready...</div>
   <cast-media-player></cast-media-player>
   <script>
+    const debug = document.getElementById('debug');
     const context = cast.framework.CastReceiverContext.getInstance();
-    
-    // Standard configuration to handle live HLS/M3U8 streams smoothly
+    const playerManager = context.getPlayerManager();
+
+    // 🌟 This allows the receiver to load the http proxy from your phone
     const playbackConfig = new cast.framework.PlaybackConfig();
-    playbackConfig.autoResumeDuration = 5;
+    playbackConfig.allowInsecureRequests = true;
+
+    playerManager.addEventListener(cast.framework.events.category.CORE, (event) => {
+      debug.innerText = "Event: " + event.type;
+      console.log(event);
+    });
+
+    playerManager.addEventListener(cast.framework.events.EventType.ERROR, (event) => {
+      debug.style.color = "red";
+      debug.innerText = "Error: " + event.detailedErrorCode;
+    });
+
     context.start({playbackConfig: playbackConfig});
   </script>
 </body>
