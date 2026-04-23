@@ -4,210 +4,134 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>CantosTV Receiver</title>
-
-  <!-- Google Cast Receiver Framework v3 (CAF) -->
   <script src="https://www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
-
-  <!-- HLS.js - needed for MPEG-TS / live IPTV streams -->
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
-
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body {
-      width: 100%; height: 100%;
-      background: #0A1628;
-      color: #FFFFFF;
-      font-family: 'Roboto', Arial, sans-serif;
-      overflow: hidden;
-    }
+    html, body { width: 100%; height: 100%; background: #0A1628; color: #fff; font-family: Arial, sans-serif; overflow: hidden; }
     cast-media-player {
       --background-color: #0A1628;
-      --logo-url: url('https://raw.githubusercontent.com/getw0rk3d/cantostv-receiver/main/logo.png');
-      --splash-image: url('https://raw.githubusercontent.com/getw0rk3d/cantostv-receiver/main/splash.png');
-      --theme-hue: 210;
       --progress-color: #2B8FE8;
+      --theme-hue: 210;
     }
-    /* Idle / splash screen */
     #idle-screen {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: #0A1628;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      z-index: 5;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: #0A1628; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; z-index: 5;
     }
     #idle-screen.hidden { display: none; }
-    #idle-logo {
-      width: 280px;
-      height: 280px;
-      margin-bottom: 24px;
-    }
-    #idle-title {
-      font-size: 48px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      color: #FFFFFF;
-      margin-bottom: 8px;
-    }
-    #idle-subtitle {
-      font-size: 22px;
-      color: #A8B5C7;
-      letter-spacing: 1px;
-    }
-    .pulse {
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 0.6; }
-      50% { opacity: 1; }
-    }
+    #idle-title { font-size: 48px; font-weight: 900; letter-spacing: 3px; margin-bottom: 8px; }
+    #idle-title span.blue { color: #2B8FE8; }
+    #idle-subtitle { font-size: 20px; color: #A8B5C7; }
+    #error-msg { position: fixed; bottom: 40px; left: 50%; transform: translateX(-50%); background: rgba(200,50,50,0.85); color: #fff; padding: 12px 24px; border-radius: 8px; font-size: 16px; display: none; z-index: 10; }
   </style>
 </head>
 <body>
-  <!-- Idle splash screen shown when no media is casting -->
   <div id="idle-screen">
-    <div id="idle-logo">
-      <!-- Fallback SVG logo if no image file -->
-      <svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-        <rect width="512" height="512" rx="80" fill="#0A1628"/>
-        <text x="50%" y="50%" text-anchor="middle" dy="0.35em"
-              font-family="Arial, sans-serif" font-size="72" font-weight="900"
-              fill="#2B8FE8" letter-spacing="4">CANTOS</text>
-        <text x="50%" y="62%" text-anchor="middle" dy="0.35em"
-              font-family="Arial, sans-serif" font-size="72" font-weight="900"
-              fill="#FFFFFF" letter-spacing="4">TV</text>
-        <circle cx="256" cy="380" r="32" fill="none" stroke="#FFFFFF" stroke-width="4"/>
-        <polygon points="245,365 245,395 275,380" fill="#FFFFFF"/>
-      </svg>
-    </div>
-    <div id="idle-title">CantosTV</div>
-    <div id="idle-subtitle pulse">Ready to cast</div>
+    <svg width="120" height="120" viewBox="0 0 120 120" style="margin-bottom:24px">
+      <rect width="120" height="120" rx="20" fill="#0A1628"/>
+      <rect x="10" y="25" width="100" height="65" rx="8" fill="none" stroke="#2B8FE8" stroke-width="5"/>
+      <rect x="45" y="90" width="30" height="8" rx="2" fill="#2B8FE8"/>
+      <polygon points="48,45 48,75 78,60" fill="#2B8FE8"/>
+    </svg>
+    <div id="idle-title"><span class="blue">CANTOS</span>TV</div>
+    <div id="idle-subtitle">Ready to cast</div>
   </div>
 
-  <!-- The actual media player element (CAF-managed) -->
+  <div id="error-msg"></div>
+
   <cast-media-player id="player"></cast-media-player>
 
   <script>
-    // ============================================================
-    // CantosTV Custom Receiver
-    // Supports: HLS (.m3u8), MPEG-TS (.ts), MP4, MKV
-    // ============================================================
-
     const context = cast.framework.CastReceiverContext.getInstance();
     const playerManager = context.getPlayerManager();
     const idleScreen = document.getElementById('idle-screen');
+    const errorMsg = document.getElementById('error-msg');
 
-    // -------- Content type handling --------
-
-    /**
-     * Determine the stream type from URL + MIME to pick the right player.
-     * Returns 'hls' | 'ts' | 'mp4' | 'other'
-     */
-    function detectStreamType(contentUrl, contentType) {
-      const url = (contentUrl || '').toLowerCase().split('?')[0];
-      const mime = (contentType || '').toLowerCase();
-
-      if (mime.includes('mpegurl') || url.endsWith('.m3u8')) return 'hls';
-      if (mime.includes('mp2t') || url.endsWith('.ts')) return 'ts';
-      if (mime.includes('mp4') || url.endsWith('.mp4')) return 'mp4';
-      if (mime.includes('matroska') || url.endsWith('.mkv')) return 'mkv';
-
-      // Xtream /live/ URLs without extension - assume HLS-compatible stream
-      if (url.includes('/live/')) return 'hls';
-      return 'other';
+    function showError(msg) {
+      errorMsg.textContent = msg;
+      errorMsg.style.display = 'block';
+      setTimeout(() => { errorMsg.style.display = 'none'; }, 8000);
     }
 
-    // -------- Intercept LOAD requests to inject HLS.js for MPEG-TS --------
-
+    // ── LOAD interceptor ──────────────────────────────────────────────────────
+    // Key insight: Xtream .m3u8 streams contain MPEG-TS segments.
+    // We must tell CAF the segment format is TS, otherwise it tries to parse
+    // them as fMP4 and fails silently.
     playerManager.setMessageInterceptor(
       cast.framework.messages.MessageType.LOAD,
       (loadRequest) => {
-        const mediaInfo = loadRequest.media;
-        const url = mediaInfo.contentUrl || mediaInfo.contentId;
-        const type = detectStreamType(url, mediaInfo.contentType);
+        const media = loadRequest.media;
+        const url = (media.contentUrl || media.contentId || '').toLowerCase();
+        const mime = (media.contentType || '').toLowerCase();
 
-        console.log('[CantosTV] LOAD request:', url, 'detected type:', type);
+        console.log('[CantosTV] LOAD url=' + url + ' mime=' + mime);
 
-        // For pure HLS or MPEG-TS, we let HLS.js handle it via contentType override
-        if (type === 'hls' || type === 'ts') {
-          // Force CAF to treat it as HLS - hlsSegmentFormat tells CAF the inner format
-          mediaInfo.contentType = 'application/x-mpegurl';
-          mediaInfo.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.TS;
-          mediaInfo.hlsVideoSegmentFormat = cast.framework.messages.HlsVideoSegmentFormat.MPEG2_TS;
+        const isHLS  = mime.includes('mpegurl') || url.includes('.m3u8');
+        const isTS   = mime.includes('mp2t')    || url.endsWith('.ts');
+        const isLive = url.includes('/live/')   || media.streamType === cast.framework.messages.StreamType.LIVE;
 
-          // Mark as LIVE if this is a live stream (live MPEG-TS has no fixed duration)
-          if (type === 'ts' || url.includes('/live/')) {
-            mediaInfo.streamType = cast.framework.messages.StreamType.LIVE;
-          }
+        if (isHLS || isTS) {
+          // Always tell CAF the inner segment format is MPEG-TS
+          // This is THE critical setting for Xtream/IPTV streams
+          media.contentType = 'application/x-mpegurl';
+          media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.TS;
+          media.hlsVideoSegmentFormat = cast.framework.messages.HlsVideoSegmentFormat.MPEG2_TS;
+          console.log('[CantosTV] Configured as HLS+TS, isLive=' + isLive);
+        }
+
+        if (isLive) {
+          media.streamType = cast.framework.messages.StreamType.LIVE;
         }
 
         return loadRequest;
       }
     );
 
-    // -------- Event listeners for logging + splash control --------
+    // ── Player events ─────────────────────────────────────────────────────────
+    playerManager.addEventListener(cast.framework.events.EventType.LOAD_START, () => {
+      console.log('[CantosTV] LOAD_START');
+      idleScreen.classList.add('hidden');
+    });
 
-    playerManager.addEventListener(
-      cast.framework.events.EventType.LOAD_START,
-      () => {
-        console.log('[CantosTV] LOAD_START');
-        idleScreen.classList.add('hidden');
-      }
-    );
+    playerManager.addEventListener(cast.framework.events.EventType.PLAYING, () => {
+      console.log('[CantosTV] PLAYING ✅');
+      idleScreen.classList.add('hidden');
+    });
 
-    playerManager.addEventListener(
-      cast.framework.events.EventType.PLAYING,
-      () => {
-        console.log('[CantosTV] PLAYING');
-        idleScreen.classList.add('hidden');
-      }
-    );
+    playerManager.addEventListener(cast.framework.events.EventType.BUFFERING, () => {
+      console.log('[CantosTV] BUFFERING...');
+    });
 
-    playerManager.addEventListener(
-      cast.framework.events.EventType.ENDED,
-      () => {
-        console.log('[CantosTV] ENDED');
-        idleScreen.classList.remove('hidden');
-      }
-    );
+    playerManager.addEventListener(cast.framework.events.EventType.ENDED, () => {
+      console.log('[CantosTV] ENDED');
+      idleScreen.classList.remove('hidden');
+    });
 
-    playerManager.addEventListener(
-      cast.framework.events.EventType.ERROR,
-      (event) => {
-        console.error('[CantosTV] PLAYBACK ERROR:', event.detailedErrorCode, event);
-        idleScreen.classList.remove('hidden');
-      }
-    );
+    playerManager.addEventListener(cast.framework.events.EventType.ERROR, (event) => {
+      const code = event.detailedErrorCode;
+      console.error('[CantosTV] ERROR code=' + code, JSON.stringify(event));
+      showError('Playback error: ' + code);
+      idleScreen.classList.remove('hidden');
+    });
 
-    // -------- Playback configuration --------
+    playerManager.addEventListener(cast.framework.events.EventType.MEDIA_STATUS, (event) => {
+      const s = event.mediaStatus;
+      if (s) console.log('[CantosTV] STATUS playerState=' + s.playerState + ' idleReason=' + s.idleReason);
+    });
 
+    // ── Playback config ───────────────────────────────────────────────────────
     const playbackConfig = new cast.framework.PlaybackConfig();
-    // Bigger buffer helps live MPEG-TS streams that bounce bitrates
-    playbackConfig.autoResumeDuration = 5;
-    playbackConfig.autoResumeNumberOfSegments = 5;
-    playbackConfig.autoPauseDuration = 10;
-    playbackConfig.initialBandwidth = 1500000;
-    // Allow more retries for shaky IPTV origins
-    playbackConfig.segmentRequestRetryLimit = 5;
+    playbackConfig.segmentRequestRetryLimit  = 5;
     playbackConfig.manifestRequestRetryLimit = 5;
+    playbackConfig.initialBandwidth = 2000000;
 
-    // -------- Receiver options --------
-
+    // ── Start receiver ────────────────────────────────────────────────────────
     const options = new cast.framework.CastReceiverOptions();
     options.playbackConfig = playbackConfig;
-    // Keep the receiver alive longer when idle (prevents premature disconnects)
-    options.maxInactivity = 3600; // 1 hour
-    // Custom namespace so we can send custom messages from the sender app if needed later
-    options.customNamespaces = {
-      'urn:x-cast:com.cantostv.custom': cast.framework.system.MessageType.JSON,
-    };
-
-    // -------- Start the receiver --------
+    options.maxInactivity = 3600;
 
     context.start(options);
-    console.log('[CantosTV] Receiver started and ready.');
+    console.log('[CantosTV] Receiver v2 started.');
   </script>
 </body>
 </html>
