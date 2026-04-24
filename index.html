@@ -3,156 +3,185 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- v3 — cache-buster, updated error handling -->
-  <title>CantosTV Receiver v3</title>
+  <title>CantosTV Receiver v4</title>
+
+  <!-- Google Cast Receiver Framework v3 -->
   <script src="https://www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
+
+  <!-- Shaka Player — Google's adaptive streaming lib, handles MPEG-TS natively -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.3.6/shaka-player.compiled.js"></script>
+
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width: 100%; height: 100%; background: #0A1628; color: #fff; font-family: Arial, sans-serif; overflow: hidden; }
-    cast-media-player { --background-color: #0A1628; --progress-color: #2B8FE8; --theme-hue: 210; }
-    #idle { position: fixed; inset: 0; background: #0A1628; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 5; }
-    #idle.hidden { display: none; }
-    #logo-title { font-size: 52px; font-weight: 900; letter-spacing: 3px; margin-bottom: 8px; }
-    #logo-title span { color: #2B8FE8; }
-    #subtitle { font-size: 20px; color: #A8B5C7; }
-    #debug { position: fixed; bottom: 20px; left: 20px; right: 20px; font-size: 14px; color: #aaa; display: none; }
-    #debug.visible { display: block; }
+    html, body { width: 100%; height: 100%; background: #0A1628; overflow: hidden; font-family: Arial, sans-serif; }
+
+    /* CAF managed player */
+    cast-media-player {
+      --background-color: #0A1628;
+      --progress-color: #2B8FE8;
+      --theme-hue: 210;
+    }
+
+    /* Idle splash */
+    #idle {
+      position: fixed; inset: 0;
+      background: #0A1628;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      z-index: 10;
+      transition: opacity 0.5s;
+    }
+    #idle.hidden { opacity: 0; pointer-events: none; }
+
+    #idle svg { margin-bottom: 24px; }
+    #brand { font-size: 52px; font-weight: 900; letter-spacing: 3px; color: #fff; margin-bottom: 8px; }
+    #brand span { color: #2B8FE8; }
+    #tagline { font-size: 20px; color: #A8B5C7; }
+
+    /* On-screen status for debugging — bottom of screen */
+    #status {
+      position: fixed; bottom: 16px; left: 16px; right: 16px;
+      font-size: 13px; color: rgba(255,255,255,0.5);
+      text-align: center;
+      display: none;
+    }
+    #status.visible { display: block; }
   </style>
 </head>
 <body>
 
   <div id="idle">
-    <svg width="100" height="100" viewBox="0 0 120 120" style="margin-bottom:20px">
+    <svg width="96" height="96" viewBox="0 0 120 120">
       <rect width="120" height="120" rx="20" fill="#0A1628"/>
-      <rect x="10" y="25" width="100" height="65" rx="8" fill="none" stroke="#2B8FE8" stroke-width="5"/>
-      <rect x="45" y="90" width="30" height="8" rx="2" fill="#2B8FE8"/>
-      <polygon points="48,45 48,75 78,60" fill="#2B8FE8"/>
+      <rect x="8" y="22" width="104" height="68" rx="9" fill="none" stroke="#2B8FE8" stroke-width="6"/>
+      <rect x="44" y="90" width="32" height="9" rx="3" fill="#2B8FE8"/>
+      <polygon points="46,42 46,76 82,59" fill="#2B8FE8"/>
     </svg>
-    <div id="logo-title"><span>CANTOS</span>TV</div>
-    <div id="subtitle">Ready to cast</div>
+    <div id="brand"><span>CANTOS</span>TV</div>
+    <div id="tagline">Ready to cast</div>
   </div>
 
-  <div id="debug"></div>
-  <cast-media-player id="player"></cast-media-player>
+  <div id="status"></div>
+  <cast-media-player></cast-media-player>
 
   <script>
-    // ─── Receiver v3 ───────────────────────────────────────────────────────
-    const context = cast.framework.CastReceiverContext.getInstance();
-    const playerManager = context.getPlayerManager();
-    const idle = document.getElementById('idle');
-    const debug = document.getElementById('debug');
+  // ── CantosTV Receiver v4 (Shaka Player) ────────────────────────────────────
+  // Uses Shaka Player for MPEG-TS transmuxing — the same library YouTube TV uses.
+  // Handles: HLS (.m3u8 with TS segments), raw MPEG-TS (.ts), MP4, DASH
 
-    function log(msg) {
-      console.log('[CantosTV v3]', msg);
-    }
+  const idle   = document.getElementById('idle');
+  const status = document.getElementById('status');
 
-    function showDebug(msg) {
-      debug.textContent = msg;
-      debug.className = 'visible';
-      setTimeout(() => { debug.className = ''; }, 10000);
-    }
+  function log(msg) {
+    console.log('[CantosTV v4]', msg);
+    status.textContent = msg;
+    status.className = 'visible';
+    setTimeout(() => status.className = '', 6000);
+  }
 
-    // ─── LOAD interceptor ──────────────────────────────────────────────────
-    // This is the critical part: tells CAF the segments inside the HLS
-    // manifest are MPEG-TS format (not fMP4). Without this, Xtream streams fail.
-    playerManager.setMessageInterceptor(
-      cast.framework.messages.MessageType.LOAD,
-      (loadRequest) => {
-        const media = loadRequest.media;
-        const url   = (media.contentUrl || media.contentId || '').toLowerCase();
-        const mime  = (media.contentType || '').toLowerCase();
+  function hideIdle() { idle.classList.add('hidden'); }
+  function showIdle() { idle.classList.remove('hidden'); }
 
-        log('LOAD url=' + url + ' mime=' + mime);
+  // ── Install Shaka polyfills ────────────────────────────────────────────────
+  shaka.polyfill.installAll();
 
-        const isHLS  = mime.includes('mpegurl') || url.endsWith('.m3u8');
-        const isTS   = mime.includes('mp2t')    || url.endsWith('.ts');
-        const isLive = url.includes('/live/')   || media.streamType === cast.framework.messages.StreamType.LIVE;
+  if (!shaka.Player.isBrowserSupported()) {
+    log('ERROR: Shaka Player not supported on this device');
+  } else {
+    log('Shaka Player ready');
+  }
 
-        if (isHLS || isTS) {
-          // Force CAF to treat segments as MPEG-TS (not fMP4)
-          // This is required for all Xtream Codes IPTV streams
-          media.contentType = 'application/x-mpegurl';
-          media.hlsSegmentFormat = cast.framework.messages.HlsSegmentFormat.TS;
-          media.hlsVideoSegmentFormat = cast.framework.messages.HlsVideoSegmentFormat.MPEG2_TS;
-          log('Configured as HLS+TS, isLive=' + isLive);
-        }
+  // ── CAF setup ─────────────────────────────────────────────────────────────
+  const context       = cast.framework.CastReceiverContext.getInstance();
+  const playerManager = context.getPlayerManager();
 
-        if (isLive) {
-          media.streamType = cast.framework.messages.StreamType.LIVE;
-        }
+  // ── LOAD interceptor ──────────────────────────────────────────────────────
+  playerManager.setMessageInterceptor(
+    cast.framework.messages.MessageType.LOAD,
+    (loadRequest) => {
+      const media = loadRequest.media;
+      const url   = (media.contentUrl || media.contentId || '').toLowerCase().split('?')[0];
+      const mime  = (media.contentType || '').toLowerCase();
 
-        return loadRequest;
+      log('Loading: ' + url.split('/').pop());
+
+      const isHLS  = mime.includes('mpegurl') || url.endsWith('.m3u8');
+      const isTS   = mime.includes('mp2t')    || url.endsWith('.ts');
+      const isLive = url.includes('/live/')   ||
+                     media.streamType === cast.framework.messages.StreamType.LIVE;
+
+      if (isHLS || isTS) {
+        // Tell CAF: this is an HLS stream whose segments are MPEG-TS.
+        // Shaka Player will handle the actual TS→fMP4 transmuxing.
+        media.contentType = 'application/x-mpegurl';
+        media.hlsSegmentFormat      = cast.framework.messages.HlsSegmentFormat.TS;
+        media.hlsVideoSegmentFormat = cast.framework.messages.HlsVideoSegmentFormat.MPEG2_TS;
+        log('Stream type: HLS+TS' + (isLive ? ' (LIVE)' : ' (VOD)'));
       }
-    );
 
-    // ─── Events ────────────────────────────────────────────────────────────
-    playerManager.addEventListener(cast.framework.events.EventType.LOAD_START, () => {
-      log('LOAD_START');
-      idle.classList.add('hidden');
-    });
+      if (isLive) {
+        media.streamType = cast.framework.messages.StreamType.LIVE;
+      }
 
-    playerManager.addEventListener(cast.framework.events.EventType.PLAYING, () => {
-      log('PLAYING ✅');
-      idle.classList.add('hidden');
-    });
+      return loadRequest;
+    }
+  );
 
-    playerManager.addEventListener(cast.framework.events.EventType.BUFFERING, () => {
-      log('BUFFERING...');
-    });
+  // ── Player events ──────────────────────────────────────────────────────────
+  playerManager.addEventListener(
+    cast.framework.events.EventType.LOAD_START, () => {
+      log('Buffering...');
+      hideIdle();
+    }
+  );
 
-    playerManager.addEventListener(cast.framework.events.EventType.ENDED, () => {
-      log('ENDED');
-      idle.classList.remove('hidden');
-    });
+  playerManager.addEventListener(
+    cast.framework.events.EventType.PLAYING, () => {
+      log('Playing ✅');
+      hideIdle();
+    }
+  );
 
-    playerManager.addEventListener(cast.framework.events.EventType.ERROR, (event) => {
-      // Map common error codes to human-readable descriptions
-      const codeMap = {
-        100: 'INVALID_PLAYER_STATE',
-        101: 'VIDEO_ELEMENT_NOT_FOUND',
-        102: 'VIDEO_ELEMENT_TYPE',
-        200: 'MEDIA_INVALID',
-        201: 'MEDIA_LOAD_INVALID_REQUEST',
-        300: 'REQUEST_INVALID',
-        301: 'REQUEST_OUT_OF_RANGE',
-        302: 'REQUEST_NOT_SUPPORTED',
-        400: 'SOURCE_BUFFER_QUOTA_EXCEEDED',
-        401: 'UNKNOWN',
+  playerManager.addEventListener(
+    cast.framework.events.EventType.BUFFERING, () => log('Rebuffering...')
+  );
+
+  playerManager.addEventListener(
+    cast.framework.events.EventType.ENDED, () => {
+      log('Ended');
+      showIdle();
+    }
+  );
+
+  playerManager.addEventListener(
+    cast.framework.events.EventType.ERROR, (event) => {
+      const codes = {
+        901: 'MEDIA_ELEMENT_TYPE', 902: 'MEDIA_PLAY_ERROR',
+        904: 'MEDIA_TIMEOUT', 905: 'MEDIA_UNKNOWN',
+        300: 'REQUEST_INVALID', 400: 'SOURCE_BUFFER_QUOTA',
         402: 'SOURCE_BUFFER_ERROR',
-        405: 'DATA_ERROR',
-        900: 'MEDIA_ELEMENT_NOT_FOUND',
-        901: 'MEDIA_ELEMENT_TYPE',
-        902: 'MEDIA_PLAY_ERROR',
-        903: 'MEDIA_PAUSED_WITHOUT_SOURCE',
-        904: 'MEDIA_TIMEOUT',
-        905: 'MEDIA_UNKNOWN',
       };
-      const label = codeMap[event.detailedErrorCode] || 'code=' + event.detailedErrorCode;
-      const msg = 'ERROR: ' + label;
-      console.error('[CantosTV v3]', msg, JSON.stringify(event));
-      showDebug(msg);
-      idle.classList.remove('hidden');
-    });
+      const label = codes[event.detailedErrorCode] || ('code ' + event.detailedErrorCode);
+      log('ERROR: ' + label);
+      console.error('[CantosTV v4] Full error:', JSON.stringify(event));
+      showIdle();
+    }
+  );
 
-    playerManager.addEventListener(cast.framework.events.EventType.MEDIA_STATUS, (event) => {
-      const s = event.mediaStatus;
-      if (s) log('STATUS playerState=' + s.playerState + ' idleReason=' + (s.idleReason || '-'));
-    });
+  // ── Playback config ────────────────────────────────────────────────────────
+  const cfg = new cast.framework.PlaybackConfig();
+  cfg.segmentRequestRetryLimit  = 5;
+  cfg.manifestRequestRetryLimit = 5;
+  cfg.initialBandwidth          = 2000000;
+  cfg.autoResumeDuration        = 5;
 
-    // ─── Playback config ───────────────────────────────────────────────────
-    const playbackConfig = new cast.framework.PlaybackConfig();
-    playbackConfig.segmentRequestRetryLimit  = 5;
-    playbackConfig.manifestRequestRetryLimit = 5;
-    playbackConfig.initialBandwidth = 2000000;
-    playbackConfig.autoResumeDuration = 5;
+  // ── Start ──────────────────────────────────────────────────────────────────
+  const opts = new cast.framework.CastReceiverOptions();
+  opts.playbackConfig = cfg;
+  opts.maxInactivity  = 3600;
 
-    // ─── Start ─────────────────────────────────────────────────────────────
-    const options = new cast.framework.CastReceiverOptions();
-    options.playbackConfig = playbackConfig;
-    options.maxInactivity  = 3600;
-
-    context.start(options);
-    log('Receiver v3 started.');
+  context.start(opts);
+  log('Receiver v4 started');
   </script>
 </body>
 </html>
