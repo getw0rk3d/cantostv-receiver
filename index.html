@@ -2,65 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>CantosTV Receiver v5</title>
+  <title>CantosTV Receiver v6</title>
   <script src="https://www.gstatic.com/cast/sdk/libs/caf_receiver/v3/cast_receiver_framework.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
-
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 100%; height: 100%; background: #0A1628; overflow: hidden; font-family: Arial, sans-serif; color: #fff; }
-
-    #video {
-      position: fixed; inset: 0;
-      width: 100%; height: 100%;
-      background: #000;
-      display: none;
-    }
+    #video { position: fixed; inset: 0; width: 100%; height: 100%; background: #000; display: none; }
     #video.visible { display: block; }
-
-    #idle {
-      position: fixed; inset: 0;
-      background: #0A1628;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      z-index: 5;
-      transition: opacity 0.4s;
-    }
+    #idle { position: fixed; inset: 0; background: #0A1628; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 5; transition: opacity 0.4s; }
     #idle.hidden { opacity: 0; pointer-events: none; }
-
     #brand { font-size: 52px; font-weight: 900; letter-spacing: 4px; margin: 20px 0 8px; }
     #brand span { color: #2B8FE8; }
     #tagline { font-size: 20px; color: #A8B5C7; }
-
-    /* Only shown for FATAL unrecoverable errors — not transient ones */
-    #error-msg {
-      position: fixed; bottom: 40px; left: 40px; right: 40px;
-      background: rgba(180,30,30,0.9);
-      padding: 16px 24px; border-radius: 10px;
-      font-size: 18px; text-align: center;
-      display: none; z-index: 10;
-    }
+    #error-msg { position: fixed; bottom: 40px; left: 40px; right: 40px; background: rgba(180,30,30,0.9); padding: 16px 24px; border-radius: 10px; font-size: 18px; text-align: center; display: none; z-index: 10; }
     #error-msg.visible { display: block; }
-
-    #now-playing {
-      position: fixed; top: 0; left: 0; right: 0;
-      background: linear-gradient(rgba(0,0,0,0.7), transparent);
-      padding: 20px 32px;
-      display: none; z-index: 6;
-    }
+    #now-playing { position: fixed; top: 0; left: 0; right: 0; background: linear-gradient(rgba(0,0,0,0.7), transparent); padding: 20px 32px; display: none; z-index: 6; }
     #now-playing.visible { display: block; }
     #np-title { font-size: 28px; font-weight: bold; }
     #np-sub { font-size: 16px; color: #A8B5C7; margin-top: 4px; }
-    .live-badge {
-      display: inline-block; background: #e00; color: #fff;
-      font-size: 13px; font-weight: bold; padding: 3px 10px;
-      border-radius: 4px; margin-right: 8px; vertical-align: middle;
-    }
+    .live-badge { display: inline-block; background: #e00; color: #fff; font-size: 13px; font-weight: bold; padding: 3px 10px; border-radius: 4px; margin-right: 8px; vertical-align: middle; }
+    /* Reconnecting banner — shown during auto-reconnect */
+    #reconnecting { position: fixed; bottom: 40px; left: 40px; right: 40px; background: rgba(30,100,180,0.9); padding: 14px 24px; border-radius: 10px; font-size: 18px; text-align: center; display: none; z-index: 10; }
+    #reconnecting.visible { display: block; }
   </style>
 </head>
 <body>
   <video id="video" playsinline></video>
-
   <div id="idle">
     <svg width="96" height="96" viewBox="0 0 120 120">
       <rect width="120" height="120" rx="20" fill="#0A1628"/>
@@ -71,27 +39,44 @@
     <div id="brand"><span>CANTOS</span>TV</div>
     <div id="tagline">Ready to cast</div>
   </div>
-
   <div id="error-msg"></div>
+  <div id="reconnecting">🔄 Reconnecting...</div>
   <div id="now-playing">
     <div id="np-title"></div>
     <div id="np-sub"></div>
   </div>
 
   <script>
-  const videoEl  = document.getElementById('video');
-  const idle     = document.getElementById('idle');
-  const errorEl  = document.getElementById('error-msg');
-  const npEl     = document.getElementById('now-playing');
-  const npTitle  = document.getElementById('np-title');
-  const npSub    = document.getElementById('np-sub');
+  // ── CantosTV Receiver v6 ───────────────────────────────────────────────────
+  // Key addition: watchdog timer detects stream stall and auto-reconnects.
+  // Xtream Codes servers rotate HLS playlists every 2-5 min — without a
+  // watchdog, HLS.js stalls silently when the old playlist expires.
 
-  let hlsInstance = null;
-  let npTimer = null;
+  const videoEl       = document.getElementById('video');
+  const idle          = document.getElementById('idle');
+  const errorEl       = document.getElementById('error-msg');
+  const reconnEl      = document.getElementById('reconnecting');
+  const npEl          = document.getElementById('now-playing');
+  const npTitle       = document.getElementById('np-title');
+  const npSub         = document.getElementById('np-sub');
 
-  function log(msg) { console.log('[CantosTV v5]', msg); }
+  let hlsInstance     = null;
+  let npTimer         = null;
 
-  // Only show errors for truly fatal, unrecoverable failures
+  // Watchdog state
+  let watchdogTimer   = null;
+  let lastCurrentTime = -1;
+  let stallCount      = 0;
+  const STALL_CHECK_INTERVAL = 5000;   // check every 5s
+  const STALL_TOLERANCE      = 3;      // allow 3 consecutive stalled checks (~15s) before reconnect
+  const MAX_RECONNECT_ATTEMPTS = 5;
+  let reconnectAttempts = 0;
+  let currentStreamUrl  = null;
+  let currentTitle      = null;
+  let currentIsLive     = false;
+
+  function log(msg) { console.log('[CantosTV v6]', msg); }
+
   function showFatalError(msg) {
     log('FATAL: ' + msg);
     errorEl.textContent = '⚠ ' + msg;
@@ -110,7 +95,71 @@
     npTimer = setTimeout(() => npEl.className = '', 5000);
   }
 
+  // ── Watchdog ───────────────────────────────────────────────────────────────
+  // Checks every 5s whether currentTime is advancing.
+  // If it hasn't moved for 3 consecutive checks (~15s), triggers reconnect.
+
+  function startWatchdog() {
+    stopWatchdog();
+    stallCount = 0;
+    lastCurrentTime = -1;
+    watchdogTimer = setInterval(checkStall, STALL_CHECK_INTERVAL);
+    log('Watchdog started');
+  }
+
+  function stopWatchdog() {
+    clearInterval(watchdogTimer);
+    watchdogTimer = null;
+  }
+
+  function checkStall() {
+    if (!hlsInstance || videoEl.paused) return;
+
+    const now = videoEl.currentTime;
+
+    if (now === lastCurrentTime) {
+      stallCount++;
+      log('Watchdog: stall detected (' + stallCount + '/' + STALL_TOLERANCE + ') at t=' + now);
+
+      if (stallCount >= STALL_TOLERANCE) {
+        log('Watchdog: stream frozen — triggering reconnect');
+        triggerReconnect();
+      }
+    } else {
+      // Stream is progressing normally — reset counter
+      if (stallCount > 0) log('Watchdog: stream recovered naturally');
+      stallCount = 0;
+      lastCurrentTime = now;
+    }
+  }
+
+  function triggerReconnect() {
+    if (reconnectAttempts >= MAX_RECONNECT_ATTEMPTS) {
+      showFatalError('Stream unavailable after ' + MAX_RECONNECT_ATTEMPTS + ' retries');
+      stopPlayback();
+      return;
+    }
+
+    reconnectAttempts++;
+    stallCount = 0;
+    const delay = Math.min(2000 * reconnectAttempts, 10000); // back-off: 2s, 4s, 6s, 8s, 10s
+
+    log('Reconnecting (attempt ' + reconnectAttempts + '/' + MAX_RECONNECT_ATTEMPTS + ') in ' + delay + 'ms');
+    reconnEl.textContent = '🔄 Reconnecting... (' + reconnectAttempts + '/' + MAX_RECONNECT_ATTEMPTS + ')';
+    reconnEl.className = 'visible';
+
+    setTimeout(() => {
+      reconnEl.className = '';
+      if (currentStreamUrl) {
+        playWithHLS(currentStreamUrl, currentTitle, currentIsLive, false);
+      }
+    }, delay);
+  }
+
+  // ── Playback ───────────────────────────────────────────────────────────────
+
   function stopPlayback() {
+    stopWatchdog();
     if (hlsInstance) { hlsInstance.destroy(); hlsInstance = null; }
     videoEl.pause();
     videoEl.src = '';
@@ -125,23 +174,37 @@
            u.includes('/live/');
   }
 
-  function playWithHLS(url, title, isLive) {
-    log('HLS.js: ' + title);
-    stopPlayback();
+  // resetAttempts = true when starting a new channel, false when auto-reconnecting
+  function playWithHLS(url, title, isLive, resetAttempts = true) {
+    log('HLS.js: ' + title + (resetAttempts ? ' (new)' : ' (reconnect)'));
+
+    stopWatchdog();
+    if (hlsInstance) { hlsInstance.destroy(); hlsInstance = null; }
+    videoEl.pause();
+    videoEl.src = '';
+
+    if (resetAttempts) {
+      reconnectAttempts = 0;
+      currentStreamUrl  = url;
+      currentTitle      = title;
+      currentIsLive     = isLive;
+    }
+
     hideIdle();
 
     hlsInstance = new Hls({
-      liveSyncDurationCount: 3,
+      liveSyncDurationCount:      3,
       liveMaxLatencyDurationCount: 10,
-      enableWorker: true,
-      lowLatencyMode: false,
-      backBufferLength: 30,
-      maxBufferLength: 30,
-      maxMaxBufferLength: 60,
-      manifestLoadingMaxRetry: 5,
-      levelLoadingMaxRetry: 5,
-      fragLoadingMaxRetry: 5,
-      manifestLoadingRetryDelay: 1000,
+      enableWorker:               true,
+      lowLatencyMode:             false,
+      backBufferLength:           30,
+      maxBufferLength:            30,
+      maxMaxBufferLength:         60,
+      manifestLoadingMaxRetry:    6,
+      levelLoadingMaxRetry:       6,
+      fragLoadingMaxRetry:        6,
+      manifestLoadingRetryDelay:  1500,
+      fragLoadingRetryDelay:      1000,
     });
 
     hlsInstance.loadSource(url);
@@ -156,33 +219,40 @@
       if (data.fatal) {
         log('HLS fatal: ' + data.type + ' / ' + data.details);
         if (data.type === Hls.ErrorTypes.NETWORK_ERROR) {
-          // Network errors: try to restart — common with IPTV, don't alarm user
-          log('Network error — attempting restart...');
-          hlsInstance.startLoad();
+          // Network error on a live stream → trigger watchdog-style reconnect
+          log('Network error — will reconnect');
+          triggerReconnect();
         } else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) {
-          // Media errors: try codec recovery — don't alarm user
-          log('Media error — attempting recovery...');
+          log('Media error — attempting codec recovery');
           hlsInstance.recoverMediaError();
         } else {
-          // Truly fatal — show error on screen
-          showFatalError('Stream unavailable: ' + data.details);
+          showFatalError('Stream error: ' + data.details);
           showIdle();
         }
-      } else {
-        // Non-fatal errors (very common in live IPTV) — log only, never show to user
-        log('HLS non-fatal (ignored): ' + data.details);
       }
+      // Non-fatal errors silently ignored
     });
 
     videoEl.onplaying = () => {
-      log('Playing ✅');
+      log('Playing ✅ (attempt ' + reconnectAttempts + ')');
+      reconnEl.className = '';
+      // Reset reconnect counter on successful playback
+      reconnectAttempts = 0;
       showNowPlaying(title, isLive);
+      startWatchdog();
     };
-    videoEl.onended   = () => { log('Ended'); stopPlayback(); };
-    videoEl.onerror   = () => {
+
+    videoEl.onwaiting = () => log('Buffering...');
+    videoEl.onstalled = () => {
+      log('Video stalled — watchdog will handle');
+      // Don't reconnect immediately — watchdog will confirm after STALL_TOLERANCE checks
+    };
+    videoEl.onended = () => { log('Ended'); stopPlayback(); };
+    videoEl.onerror = () => {
       const c = { 1:'ABORTED', 2:'NETWORK', 3:'DECODE', 4:'UNSUPPORTED' };
-      showFatalError(c[videoEl.error?.code] || 'Playback error');
-      showIdle();
+      const msg = c[videoEl.error?.code] || 'Playback error';
+      log('Video element error: ' + msg);
+      triggerReconnect();
     };
   }
 
@@ -190,6 +260,7 @@
     log('Native: ' + title);
     stopPlayback();
     hideIdle();
+    currentStreamUrl = null; // native streams don't use watchdog
     videoEl.src = url;
     videoEl.play().catch(e => { showFatalError(e.message); showIdle(); });
     videoEl.onplaying = () => { log('Playing ✅'); showNowPlaying(title, false); };
@@ -212,7 +283,7 @@
 
       log('LOAD: ' + title);
       setTimeout(() => {
-        isHLS(url, mime) ? playWithHLS(url, title, isLive) : playNative(url, title);
+        isHLS(url, mime) ? playWithHLS(url, title, isLive, true) : playNative(url, title);
       }, 0);
 
       return loadRequest;
@@ -227,7 +298,7 @@
   const opts = new cast.framework.CastReceiverOptions();
   opts.maxInactivity = 3600;
   context.start(opts);
-  log('Receiver v5 started');
+  log('Receiver v6 started — watchdog active');
   </script>
 </body>
 </html>
