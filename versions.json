@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.4.3",
+  "latestVersion": "1.4.4",
   "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/latest/download/CantosTV.apk",
   "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/latest",
-  "releaseNotes": "v1.4.3 — Fire TV / Chromecast with Google TV compatibility fix"
+  "releaseNotes": "v1.4.4 — Chromecast/Fire TV compatibility fix + tap-to-check-updates in Settings"
 }
