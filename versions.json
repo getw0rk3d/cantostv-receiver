@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.1",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.1/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.1",
-  "releaseNotes": "CantosTV v1.5.1 — see https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.1"
+  "latestVersion": "1.5.2",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.2/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.2",
+  "releaseNotes": "CantosTV v1.5.2\n\n- Fixed a crash on Live TV when a channel reconnected/resynced, and when\n  reopening the app after leaving it playing in the background.\n- Continue Watching now updates the instant you open a channel - every\n  channel, every time, even a quick 1-second tune-in.\n- Faster, more reliable update prompts when a new version is available.\n- Search now opens a movie or series on its own page (with a Play/Resume\n  button) instead of jumping to the tab."
 }
