@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.3",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.3/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.3",
-  "releaseNotes": "CantosTV v1.5.3\n\n- Movies and Series load more reliably now, with a clear message and a Retry\n  button if the provider is unavailable (note: some providers block movies and\n  series while you're on a VPN - turn the VPN off if they won't load).\n- Multiscreen: pick channels from a Continue Watching folder, and every channel\n  you open in a pane is added to Continue Watching.\n- Fixed the Back button closing the whole channel list instead of stepping back.\n- Movies/Series: seeking recovers on its own if it ever gets stuck (no more\n  closing and reopening), and the progress bar stays in sync after you skip.\n- New updates now prompt you right away while you're using the app."
+  "latestVersion": "1.5.4",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.4/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.4",
+  "releaseNotes": "CantosTV v1.5.4\n\n- Fixed Movies and Series getting stuck on a loading screen. They now stay on screen while refreshing and no longer blank out or get pinned to a spinner.\n- New app icon: the CANTOS TV logo."
 }
