@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.2",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.2/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.2",
-  "releaseNotes": "CantosTV v1.5.2\n\n- Fixed a crash on Live TV when a channel reconnected/resynced, and when\n  reopening the app after leaving it playing in the background.\n- Continue Watching now updates the instant you open a channel - every\n  channel, every time, even a quick 1-second tune-in.\n- Faster, more reliable update prompts when a new version is available.\n- Search now opens a movie or series on its own page (with a Play/Resume\n  button) instead of jumping to the tab."
+  "latestVersion": "1.5.3",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.3/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.3",
+  "releaseNotes": "CantosTV v1.5.3\n\n- Movies and Series load more reliably now, with a clear message and a Retry\n  button if the provider is unavailable (note: some providers block movies and\n  series while you're on a VPN - turn the VPN off if they won't load).\n- Multiscreen: pick channels from a Continue Watching folder, and every channel\n  you open in a pane is added to Continue Watching.\n- Fixed the Back button closing the whole channel list instead of stepping back.\n- Movies/Series: seeking recovers on its own if it ever gets stuck (no more\n  closing and reopening), and the progress bar stays in sync after you skip.\n- New updates now prompt you right away while you're using the app."
 }
