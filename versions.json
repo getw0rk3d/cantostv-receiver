@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.7",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.7/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.7",
-  "releaseNotes": "Phone v1.5.7\n\n- Movie detail recommendations open on top of the current page, so the phone's\n  Back button returns to the movie you opened first (not straight to Home).\n- Tapping the Home search bar now opens the keyboard automatically.\n- Trailer button lets you choose which YouTube app to use when you have more\n  than one (with Just once / Always); opens directly when you only have one.\n- Search remembers your recent searches — tap one to run it again, X to remove\n  a single entry, or Clear all to wipe the list.\n- Anything playing now PAUSES when you leave the app and RESUMES when you come\n  back (live jumps to the live edge, movies/series pick up where you paused)."
+  "latestVersion": "1.5.8",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.8/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.8",
+  "releaseNotes": "CantosTV v1.5.8\n\n- The keyboard now opens automatically when you tap Search.\n- Video now pauses when you leave the app and continues where you left off\n  when you come back (it no longer keeps playing in the background).\n- Recommended titles (\"Because you watched\") open on top, so Back returns to\n  the title you opened first.\n- The Trailer button lets you choose which YouTube app to use when you have\n  more than one, and opens directly when you only have one.\n- Search remembers your recent searches — tap one to repeat it, ✕ to remove a\n  single entry, or Clear all to wipe the list."
 }
