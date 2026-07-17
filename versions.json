@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.5",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.5/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.5",
-  "releaseNotes": "CantosTV v1.5.5\n\n- Live TV: pressing Back in the channel list now goes back to the folders instead of closing the whole panel.\n- Live TV: leaving the app while watching and coming back now re-syncs to live instantly, like a regular TV.\n- Movies & Series: if the stream drops and reconnects, it now resumes where you were instead of restarting from the beginning.\n- Player: while dragging the progress bar to seek, a time bubble now shows the exact spot you're scrubbing to."
+  "latestVersion": "1.5.6",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.6/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.6",
+  "releaseNotes": "CantosTV v1.5.6\n\n- Channel, movie, series and episode names now show in FULL instead of being cut off - everywhere they're listed, in both portrait and landscape, including the Channels and Episodes tabs inside the player."
 }
