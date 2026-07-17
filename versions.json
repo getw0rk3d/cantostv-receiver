@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.4",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.4/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.4",
-  "releaseNotes": "CantosTV v1.5.4\n\n- Fixed Movies and Series getting stuck on a loading screen. They now stay on screen while refreshing and no longer blank out or get pinned to a spinner.\n- New app icon: the CANTOS TV logo."
+  "latestVersion": "1.5.5",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.5/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.5",
+  "releaseNotes": "CantosTV v1.5.5\n\n- Live TV: pressing Back in the channel list now goes back to the folders instead of closing the whole panel.\n- Live TV: leaving the app while watching and coming back now re-syncs to live instantly, like a regular TV.\n- Movies & Series: if the stream drops and reconnects, it now resumes where you were instead of restarting from the beginning.\n- Player: while dragging the progress bar to seek, a time bubble now shows the exact spot you're scrubbing to."
 }
