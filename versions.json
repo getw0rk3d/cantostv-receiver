@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.9",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.9/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.9",
-  "releaseNotes": "CantosTV v1.5.9\n\n- Continue Watching: series episodes now group correctly under one card even\n  if the app is closed mid-episode."
+  "latestVersion": "1.5.28",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.28/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.28",
+  "releaseNotes": "CantosTV 1.5.28\n\nCloud sync\n- Live sync while the app is open and not playing: a change on one device shows up on\n  the others within a second, without the constant churn a always-on listener would\n  cause during playback.\n- Switch between cloud accounts, or add another, without inheriting someone else's\n  Continue Watching. Clearing a device now keeps a local copy you can restore.\n- Sign in with Google on the desktop app.\n\nSeries\n- Continue Watching now opens the same full player as the show page (next/previous\n  episode, auto-next, Up next).\n- Previous / Next episode buttons in the player.\n- Hold an episode to mark it watched or unwatched, on the show page or in the player.\n- Episode rows show the episode's own name and a watched tick instead of a repeated\n  show title.\n\nSubtitles\n- The season and episode boxes are filled in from what is actually playing.\n- When a Spanish title finds nothing, the search retries with the real English release\n  title, which is what the subtitle index is filed under.\n\nAlso: show/hide password on sign-in, and a clearer message when an account does not\nexist yet."
 }
