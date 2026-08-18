@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.29",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.29/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.29",
-  "releaseNotes": "CantosTV 1.5.29\n\n- Updates no longer leave the downloaded installer behind. Each update used to\n  keep its full 65 MB file in the app's storage, invisibly, forever; several\n  updates in that added up to hundreds of megabytes. The app now clears the old\n  one before downloading the next, so it never holds more than a single copy.\n- Tapping Update twice in quick succession no longer starts two downloads."
+  "latestVersion": "1.5.30",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.30/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.30",
+  "releaseNotes": "CantosTV 1.5.30\n\n- Cloud sync works again. The last two updates were built without their Firebase\n  settings, so sync was switched off in the app itself and signing in was not\n  even offered. Online subtitle search and Sign in with Google were disabled the\n  same way. All three are back.\n- Updates no longer leave the downloaded installer behind. Each update used to\n  keep its full 65 MB file in the app's storage, invisibly, forever.\n- Tapping Update twice no longer starts a second download or interrupts the one\n  already running."
 }
