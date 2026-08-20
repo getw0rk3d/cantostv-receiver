@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.30",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.30/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.30",
-  "releaseNotes": "CantosTV 1.5.30\n\n- Cloud sync works again. The last two updates were built without their Firebase\n  settings, so sync was switched off in the app itself and signing in was not\n  even offered. Online subtitle search and Sign in with Google were disabled the\n  same way. All three are back.\n- Updates no longer leave the downloaded installer behind. Each update used to\n  keep its full 65 MB file in the app's storage, invisibly, forever.\n- Tapping Update twice no longer starts a second download or interrupts the one\n  already running."
+  "latestVersion": "1.5.31",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.31/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.31",
+  "releaseNotes": "CantosTV 1.5.31\n\n- Subtitles now find the right film or episode. The app was searching by title,\n  which returned thousands of unrelated results (or none at all for a Spanish\n  show name); it now asks by the film's own id. A second subtitle site, SubDL,\n  has been added on top for wider coverage.\n- Series pages have a Resume button at the top showing the exact episode you left\n  off on, so you no longer have to scroll the episode list to find your place.\n  Open in External Player and Cast via VLC are there too, like on movies.\n- Watched ticks now agree across your devices. An episode watched on one device\n  showed no tick on another, and finishing something on the TV could remove it\n  everywhere. Watched items also leave Continue Watching on every device now.\n- Hold a movie poster to mark it watched or unwatched.\n- Locked items and locked folders no longer show up in search, and a locked\n  folder's contents are properly hidden everywhere."
 }
