@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.31",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.31/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.31",
-  "releaseNotes": "CantosTV 1.5.31\n\n- Subtitles now find the right film or episode. The app was searching by title,\n  which returned thousands of unrelated results (or none at all for a Spanish\n  show name); it now asks by the film's own id. A second subtitle site, SubDL,\n  has been added on top for wider coverage.\n- Series pages have a Resume button at the top showing the exact episode you left\n  off on, so you no longer have to scroll the episode list to find your place.\n  Open in External Player and Cast via VLC are there too, like on movies.\n- Watched ticks now agree across your devices. An episode watched on one device\n  showed no tick on another, and finishing something on the TV could remove it\n  everywhere. Watched items also leave Continue Watching on every device now.\n- Hold a movie poster to mark it watched or unwatched.\n- Locked items and locked folders no longer show up in search, and a locked\n  folder's contents are properly hidden everywhere."
+  "latestVersion": "1.5.32",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.32/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.32",
+  "releaseNotes": "CantosTV 1.5.32\n\n- Subtitle fixes for series: when a subtitle file covers a whole season, the app now\n  picks the episode you are actually watching instead of the first one. Files in a\n  format the app cannot open are now reported clearly rather than failing oddly."
 }
