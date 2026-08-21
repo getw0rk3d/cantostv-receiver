@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.32",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.32/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.32",
-  "releaseNotes": "CantosTV 1.5.32\n\n- Subtitle fixes for series: when a subtitle file covers a whole season, the app now\n  picks the episode you are actually watching instead of the first one. Files in a\n  format the app cannot open are now reported clearly rather than failing oddly."
+  "latestVersion": "1.5.33",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.33/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.33",
+  "releaseNotes": "CantosTV 1.5.33\n\n- Next and Previous episode keep your place. Stepping to the next episode and back\n  used to restart the one you were watching; it now resumes where you left off.\n- Changing episode no longer closes and reopens the player, so the switch is smooth\n  and your volume, zoom and audio boost carry over.\n- Hold a card in Continue Watching to mark it watched or unwatched.\n- Continue Watching now opens series episodes as episodes, so Previous/Next, the\n  Episodes list and subtitle search all work from there."
 }
