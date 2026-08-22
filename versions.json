@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.34",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.34/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.34",
-  "releaseNotes": "CantosTV 1.5.34\n\n- Changing episode no longer leaves the previous episode's time on the progress bar\n  while the next one loads."
+  "latestVersion": "1.5.35",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.35/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.35",
+  "releaseNotes": "CantosTV 1.5.35\n\n- Restores film and show lookups. The service key the app used was replaced, so older\n  versions can no longer fetch translated descriptions, artwork, or Rotten Tomatoes and\n  IMDb ratings, and subtitle search falls back to matching by name — which is much less\n  accurate. Update to restore all of it."
 }
