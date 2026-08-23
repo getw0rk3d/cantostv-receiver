@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.37",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.37/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.37",
-  "releaseNotes": "CantosTV 1.5.37\n\n- The Cloud Sync screen now shows when your library last synced and whether the live\n  connection is up, so you can tell at a glance instead of guessing. A failed attempt\n  shows the reason."
+  "latestVersion": "1.5.38",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.38/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.38",
+  "releaseNotes": "CantosTV v1.5.38 — see https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.38"
 }
