@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.54",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.54/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.54",
-  "releaseNotes": "CantosTV v1.5.54 — see https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.54"
+  "latestVersion": "1.5.55",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.55/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.55",
+  "releaseNotes": "Phone 1.5.55 - sync round 5: nothing you watch gets lost, catalogs load again"
 }
