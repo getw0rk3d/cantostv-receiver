@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.56",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.56/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.56",
-  "releaseNotes": "Phone 1.5.56 - posters survive sync, one card per title, download rows stay on the phone"
+  "latestVersion": "1.5.57",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.57/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.57",
+  "releaseNotes": "Phone 1.5.57 - downloads keep their place, deleted downloads leave no dead card"
 }
