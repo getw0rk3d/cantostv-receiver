@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.59",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.59/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.59",
-  "releaseNotes": "CantosTV 1.5.59\n\nPosters\n- Movies with no artwork now show their real poster instead of the title on\n  a plate. The provider had the picture all along - it just wasn't in the\n  catalogue listing - so the tile fetches it as you browse, and remembers it.\n- Applies to the movie grid, the trending rails, Continue Watching and\n  Recently Watched. The few films nobody has a poster for keep the plate."
+  "latestVersion": "1.5.60",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.60/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.60",
+  "releaseNotes": "CantosTV 1.5.60\n\nLive channels\n- A channel that plays one show around the clock now shows that show's\n  artwork instead of a letter, borrowed from the show already in your\n  catalogue.\n- Other channels without a logo keep the letter tile: this provider ships no\n  logo for them and no public database lists them either."
 }
