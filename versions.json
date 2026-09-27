@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.58",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.58/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.58",
-  "releaseNotes": "CantosTV 1.5.58\n\nArtwork\n- Movies and channels with no picture no longer show a blank box. More than\n  half this provider's films ship no poster at all, so those tiles now carry\n  the title, and a channel with no logo shows its initial.\n- A picture whose host is down now looks the same as one that was never\n  there, instead of looking like the app broke.\n\nDownloads\n- Films larger than 2 GB download. They used to fail instantly at 0%.\n- Downloads keep running when you leave the app, and survive the app being\n  swiped away.\n\nLocking\n- Select several channels, films, series, folders or episodes and lock them\n  in one go, from a bar you can reach without scrolling back up.\n- Episodes can be locked at all now, and unlocked from Locked Items.\n\nLandscape\n- Series detail and Downloads stop wasting a sideways screen."
+  "latestVersion": "1.5.59",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.59/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.59",
+  "releaseNotes": "CantosTV 1.5.59\n\nPosters\n- Movies with no artwork now show their real poster instead of the title on\n  a plate. The provider had the picture all along - it just wasn't in the\n  catalogue listing - so the tile fetches it as you browse, and remembers it.\n- Applies to the movie grid, the trending rails, Continue Watching and\n  Recently Watched. The few films nobody has a poster for keep the plate."
 }
