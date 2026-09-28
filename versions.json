@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.60",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.60/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.60",
-  "releaseNotes": "CantosTV 1.5.60\n\nLive channels\n- A channel that plays one show around the clock now shows that show's\n  artwork instead of a letter, borrowed from the show already in your\n  catalogue.\n- Other channels without a logo keep the letter tile: this provider ships no\n  logo for them and no public database lists them either."
+  "latestVersion": "1.5.61",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.61/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.61",
+  "releaseNotes": "CantosTV 1.5.61\n\n- The Episodes list in the player now has a search box, so you can find an\n  episode by name or number instead of scrolling the whole season."
 }
