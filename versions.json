@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.62",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.62/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.62",
-  "releaseNotes": "CantosTV 1.5.62\n\nParental locks\n- Anything you lock now stays hidden everywhere, not just on the screen you\n  locked it from. This closes gaps in Multiscreen, the player's Channels and\n  Episodes lists, the Home rails, the TV Guide, Favourites and Downloads.\n- Locking something now also stops it if it is already playing, and takes\n  effect on a screen you are already looking at, including when the lock was\n  set on another device."
+  "latestVersion": "1.5.63",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.63/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.63",
+  "releaseNotes": "CantosTV 1.5.63\n\nParental locks\n- Locking a whole folder now also hides anything from it that you had already\n  added to Favourites or downloaded. Existing favourites and downloads are\n  updated automatically the first time you open those screens."
 }
