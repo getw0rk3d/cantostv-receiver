@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.65",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.65/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.65",
-  "releaseNotes": "CantosTV 1.5.65\n\n- When a film or the last episode ends, the player now offers to watch it\n  again instead of closing.\n- Internal: every screen now reads the catalogue through one place that\n  applies your parental locks, so a locked title cannot reach a screen that\n  forgot to filter it."
+  "latestVersion": "1.5.66",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.66/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.66",
+  "releaseNotes": "CantosTV v1.5.66 — see https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.66"
 }
