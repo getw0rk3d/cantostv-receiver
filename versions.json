@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.64",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.64/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.64",
-  "releaseNotes": "CantosTV 1.5.64\n\nParental locks\n- A locked film's page now asks for the PIN before it will play, download or\n  cast it, and lets you watch once without lifting the lock.\n- The \"Because you watched this\" row no longer suggests locked films.\n- Search now applies a lock that arrives from another device while it is open."
+  "latestVersion": "1.5.65",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.65/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.65",
+  "releaseNotes": "CantosTV 1.5.65\n\n- When a film or the last episode ends, the player now offers to watch it\n  again instead of closing.\n- Internal: every screen now reads the catalogue through one place that\n  applies your parental locks, so a locked title cannot reach a screen that\n  forgot to filter it."
 }
