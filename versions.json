@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.63",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.63/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.63",
-  "releaseNotes": "CantosTV 1.5.63\n\nParental locks\n- Locking a whole folder now also hides anything from it that you had already\n  added to Favourites or downloaded. Existing favourites and downloads are\n  updated automatically the first time you open those screens."
+  "latestVersion": "1.5.64",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.64/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.64",
+  "releaseNotes": "CantosTV 1.5.64\n\nParental locks\n- A locked film's page now asks for the PIN before it will play, download or\n  cast it, and lets you watch once without lifting the lock.\n- The \"Because you watched this\" row no longer suggests locked films.\n- Search now applies a lock that arrives from another device while it is open."
 }
