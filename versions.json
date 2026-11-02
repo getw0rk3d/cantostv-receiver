@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.98",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.98/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.98",
-  "releaseNotes": "CantosTV v1.5.98 — see https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.98"
+  "latestVersion": "1.5.99",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.99/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.99",
+  "releaseNotes": "Skip Intro, Skip Recap and Skip Ending on series: found automatically for many shows, and your own marks for the rest. Skipping the ending goes straight to the next episode.\n\nSearch and the Movies, Series and Live TV tabs have filters for genre, year, language, quality, service, country and channel type, and list the newest first.\n\nShows you follow now say when new episodes arrive, on the poster, the show page and a New Episodes row on Home.\n\nThe Series page has the same buttons as the Movie page, including Download, and Live TV no longer offers playback speed."
 }
