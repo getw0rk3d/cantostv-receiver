@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.5.99",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.5.99/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.5.99",
-  "releaseNotes": "Skip Intro, Skip Recap and Skip Ending on series: found automatically for many shows, and your own marks for the rest. Skipping the ending goes straight to the next episode.\n\nSearch and the Movies, Series and Live TV tabs have filters for genre, year, language, quality, service, country and channel type, and list the newest first.\n\nShows you follow now say when new episodes arrive, on the poster, the show page and a New Episodes row on Home.\n\nThe Series page has the same buttons as the Movie page, including Download, and Live TV no longer offers playback speed."
+  "latestVersion": "1.6.0",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.0/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.0",
+  "releaseNotes": "The server now shows as iptv.cantostv.com, and Add Playlist starts with it filled in.\n\nEvery form field has a clear (X) button that empties it in one tap, and the sign-in screen has a show-password eye.\n\nSigning out of Sync saves your library to your account and leaves this phone clean. Sign back in and it all comes back.\n\nOn Live TV, Movies and Series the search keyboard closes when you press Search, scroll the results or open a title.\n\nForgot password? now sends a CantosTV email."
 }
