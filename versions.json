@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.6.0",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.0/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.0",
-  "releaseNotes": "The server now shows as iptv.cantostv.com, and Add Playlist starts with it filled in.\n\nEvery form field has a clear (X) button that empties it in one tap, and the sign-in screen has a show-password eye.\n\nSigning out of Sync saves your library to your account and leaves this phone clean. Sign back in and it all comes back.\n\nOn Live TV, Movies and Series the search keyboard closes when you press Search, scroll the results or open a title.\n\nForgot password? now sends a CantosTV email."
+  "latestVersion": "1.6.1",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.1/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.1",
+  "releaseNotes": "Live TV shows what's on now under every channel: the start time, the show and a bar for how far into it you are. It is in the Live TV list and in the player's Channels List, and it moves on to the next show by itself.\n\nSync my account: the keyboard no longer hides the email and password boxes while you type."
 }
