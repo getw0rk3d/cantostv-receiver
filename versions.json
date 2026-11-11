@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.6.1",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.1/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.1",
-  "releaseNotes": "Live TV shows what's on now under every channel: the start time, the show and a bar for how far into it you are. It is in the Live TV list and in the player's Channels List, and it moves on to the next show by itself.\n\nSync my account: the keyboard no longer hides the email and password boxes while you type."
+  "latestVersion": "1.6.2",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.2/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.2",
+  "releaseNotes": "Live TV: when a channel's picture freezes or the sound drops, the app now notices and reconnects by itself. The channel that kept losing its sound (ECU: El Canal del Futbol) now plays with steady sound.\n\nSubtitles: movies and episodes that have their own subtitles now show them first, under \"Subtitles in this file\" - always in sync. Online subtitles stay in step with the video, and the sync buttons move exactly what they say (-1s, -0.25s, +0.25s, +1s).\n\nPlayer settings on a phone held upright: they open under the picture so you can still watch it, and you can drag them down to close."
 }
