@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.6.2",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.2/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.2",
-  "releaseNotes": "Live TV: when a channel's picture freezes or the sound drops, the app now notices and reconnects by itself. The channel that kept losing its sound (ECU: El Canal del Futbol) now plays with steady sound.\n\nSubtitles: movies and episodes that have their own subtitles now show them first, under \"Subtitles in this file\" - always in sync. Online subtitles stay in step with the video, and the sync buttons move exactly what they say (-1s, -0.25s, +0.25s, +1s).\n\nPlayer settings on a phone held upright: they open under the picture so you can still watch it, and you can drag them down to close."
+  "latestVersion": "1.6.3",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.3/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.3",
+  "releaseNotes": "CantosTV 1.6.3\n\n- Trending on Home is now what is actually trending this week that your catalogue has - the same all day, a new list each morning (it used to reshuffle at random every time Home loaded).\n- More like this on a movie page now shows films like it: TMDB recommendations for that exact film that are in the catalogue.\n- Select multiple: a new round tick everywhere you pick several things.\n- Live TV > Continue Watching: Select multiple to remove."
 }
