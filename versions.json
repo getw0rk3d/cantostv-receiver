@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.6.6",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.6/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.6",
-  "releaseNotes": "Phone 1.6.6: QR sign-in, sign in another device"
+  "latestVersion": "1.6.7",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.7/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.7",
+  "releaseNotes": "Phone 1.6.7: Live TV preview (tablets), Report a problem, boost/search/subtitle/PIN fixes"
 }
