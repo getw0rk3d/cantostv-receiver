@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.6.5",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.5/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.5",
-  "releaseNotes": "CantosTV 1.6.5\n\n- Live TV shows what's on now again (the provider's per-channel guide went empty after its server move; the guide now comes from an hourly guide file)\n- Family profiles: each person keeps their own Continue Watching, history and favorites (Settings > Account > Profile)\n- An update you put off stays in Settings > About with Update now"
+  "latestVersion": "1.6.6",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.6/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.6",
+  "releaseNotes": "Phone 1.6.6: QR sign-in, sign in another device"
 }
