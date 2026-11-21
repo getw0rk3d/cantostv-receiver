@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.6.9",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.9/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.9",
-  "releaseNotes": "Phone 1.6.9: check marks on what you finished, a cast chooser for cast apps, a channel menu in the player (favorite, lock, remind me, cast), live reminders, Kids profiles see kids content only, Send to my TV, DLNA finds DLNA TVs"
+  "latestVersion": "1.6.10",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.10/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.10",
+  "releaseNotes": "Phone 1.6.10: the second subtitle source (SubDL) works again with a new key"
 }
