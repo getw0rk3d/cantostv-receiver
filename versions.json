@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.6.13",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.13/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.13",
-  "releaseNotes": "Phone 1.6.13"
+  "latestVersion": "1.6.14",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.14/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.14",
+  "releaseNotes": "The channel list in the live player opens and closes smoothly - the picture slides up with it instead of flickering. Update messages now say what each new version changes."
 }
