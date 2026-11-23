@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.6.11",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.11/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.11",
-  "releaseNotes": "Phone 1.6.11: More like this when a film or show ends and on the series page, subtitle background and position, audio sync, report a problem from the player"
+  "latestVersion": "1.6.12",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.12/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.12",
+  "releaseNotes": "Phone 1.6.12: pick Spanish or English on live [DUAL] channels (player settings, Audio track); full channel, film and show names instead of cut-off ones"
 }
