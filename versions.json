@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.6.17",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.17/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.17",
-  "releaseNotes": "Movie pages show the quality and language of the copy (FHD, 4K, CAM, DUAL LAT) with the phone held sideways too."
+  "latestVersion": "1.6.18",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.18/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.18",
+  "releaseNotes": "With the phone held sideways, the show or channel name is no longer hidden behind the player buttons. Back closes an open player menu instead of the video."
 }
