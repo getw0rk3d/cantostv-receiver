@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.6.15",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.15/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.15",
-  "releaseNotes": "Menus in the player (Audio, Subtitles, Aspect Ratio and Settings) open and close smoothly - the picture slides with them instead of flickering. The Episodes list opens right on the episode you are watching."
+  "latestVersion": "1.6.16",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.16/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.16",
+  "releaseNotes": "When a movie or show ends, a new screen shows what to watch next, with each pick's poster, details and description. Movie and show pages now show the quality and language of the copy (FHD, 4K, CAM, DUAL LAT). Movies and Series show 3 posters per row so they are bigger, and the full title shows in the player."
 }
