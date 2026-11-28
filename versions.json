@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.6.21",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.21/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.21",
-  "releaseNotes": "After searching for a folder in Live TV, the keyboard now closes, so it no longer covers the channel list under the picture."
+  "latestVersion": "1.6.22",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.22/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.22",
+  "releaseNotes": "Live TV: the list next to the picture now keeps the same order as the Live TV list (sort, filters and search). With the phone held sideways, the hint takes one line."
 }
