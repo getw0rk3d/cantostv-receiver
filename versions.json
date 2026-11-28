@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.6.19",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.19/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.19",
-  "releaseNotes": "Channel lists show each channel's full name and the full title of what is on now, in the player, on Live TV and in Search, instead of cutting it off."
+  "latestVersion": "1.6.20",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.20/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.20",
+  "releaseNotes": "Live TV: tapping a channel now plays it in the top half, above the same channel list, so you can try other channels. Tap it again (or the picture) for full screen."
 }
