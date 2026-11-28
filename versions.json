@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.6.22",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.22/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.22",
-  "releaseNotes": "Live TV: the list next to the picture now keeps the same order as the Live TV list (sort, filters and search). With the phone held sideways, the hint takes one line."
+  "latestVersion": "1.6.23",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.23/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.23",
+  "releaseNotes": "When a channel can't play while the channel list is open, the message now fits above the list and no longer covers the back and full-screen buttons."
 }
