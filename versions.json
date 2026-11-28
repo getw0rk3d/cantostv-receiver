@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.6.18",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.18/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.18",
-  "releaseNotes": "With the phone held sideways, the show or channel name is no longer hidden behind the player buttons. Back closes an open player menu instead of the video."
+  "latestVersion": "1.6.19",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.19/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.19",
+  "releaseNotes": "Channel lists show each channel's full name and the full title of what is on now, in the player, on Live TV and in Search, instead of cutting it off."
 }
