@@ -1,6 +1,6 @@
 {
-  "latestVersion": "1.6.20",
-  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.20/CantosTV.apk",
-  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.20",
-  "releaseNotes": "Live TV: tapping a channel now plays it in the top half, above the same channel list, so you can try other channels. Tap it again (or the picture) for full screen."
+  "latestVersion": "1.6.21",
+  "downloadUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/download/v1.6.21/CantosTV.apk",
+  "releasePageUrl": "https://github.com/getw0rk3d/cantostv-receiver/releases/tag/v1.6.21",
+  "releaseNotes": "After searching for a folder in Live TV, the keyboard now closes, so it no longer covers the channel list under the picture."
 }
